@@ -8,6 +8,9 @@
     "test-watch": "nodemon --exec \"npm test\"",
     "start": "node server/server.js"
   },
+  "engines": {
+    "node": "10.1.0"
+  },
   "author": "Tejas patel",
   "license": "ISC",
   "dependencies": {
