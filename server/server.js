@@ -70,6 +70,7 @@ app.delete('/todos/:id', (req, res) => {
     });
 });
 
+// patch(update) request for todos
 app.patch('/todos/:id', (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['text', 'completed']);
