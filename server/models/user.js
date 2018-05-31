@@ -32,6 +32,7 @@ let UserSchema = new mongoose.Schema({
     }]
 });
 
+// function used for sending only poperty that we want in response while user sign up. We won't sent password or tokens. 
 UserSchema.methods.toJSON = function() {
     let user = this;
     let userObject = user.toObject();
@@ -39,6 +40,7 @@ UserSchema.methods.toJSON = function() {
     return _.pick(userObject,['_id','email']);
 };
 
+// function for generating authentication token while sign up. It uses jsonwebtoken. then it saves token and access property of tokens. 
 UserSchema.methods.generateAuthToken = function() {
     let user = this;
     let access = 'auth';
@@ -49,6 +51,7 @@ UserSchema.methods.generateAuthToken = function() {
     });
 };
 
+// function used to authenticate user login. It takes token from request and then decode it so that it can find user with id and token releted to it.  
 UserSchema.statics.findByToken = function (token) {
     let User = this;
     let decoded;
@@ -66,6 +69,7 @@ UserSchema.statics.findByToken = function (token) {
     });
 };
 
+// following function will run before save action in database when password property is modified. It will hash the password using bcryptjs and update the password in database to hash password. 
 UserSchema.pre('save', function(next) {
     let user = this;
     if(user.isModified('password')) {
