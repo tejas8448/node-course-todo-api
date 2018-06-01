@@ -69,6 +69,7 @@ UserSchema.statics.findByToken = function (token) {
     });
 };
 
+// this function is used for comparing the password with user password after finding user from database with email
 UserSchema.statics.findByCredentials = function (email, password) {
     let User = this;
     return User.findOne({email}).then((user) => {
