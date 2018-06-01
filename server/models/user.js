@@ -51,6 +51,17 @@ UserSchema.methods.generateAuthToken = function() {
     });
 };
 
+// function for logging out user (removing tokenj)
+UserSchema.methods.removeToken = function (token) {
+    let user = this;
+
+    return user.update({
+        $pull: {
+            tokens: {token}
+        }
+    });
+};
+
 // function used to authenticate user login. It takes token from request and then decode it so that it can find user with id and token releted to it.  
 UserSchema.statics.findByToken = function (token) {
     let User = this;
